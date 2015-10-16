@@ -1,9 +1,260 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Choose your Road</title>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Road Finder</title>
 
-</body>
+      <!-- Javascript CDN -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+   <!-- Latest compiled and minified JavaScript -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+   <!-- Bootstrap CDN -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+
+    <!-- APPLICATION SCRIPTS -->
+  <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+  <script src="/static/js/app.js"></script>
+
+  </head>
+  <body>
+    <h1>Find Your Road<hr></br></h1>
+
+    <div id="wrapper" class="container">
+      <div id="inspiration" class="col-sm-12">
+        <div id="photodisplay" class="col-sm-8"><!-- image should change by photoselector click -->
+          <img src="http://placehold.it/550x344">
+        
+        </div>
+        <div id="photoselector" class="col-sm-4"> <!-- clickable thumbnails that display full size to photodisplay-->
+          <h2> Road Inspiration</h2>
+          <p>Click on an image below to see it displayed larger to the left.  Find an image that speaks to you, or triggers an emotional response.</p>
+          <img src="/static/images/road1.jpg">
+          <img src="/static/images/road2.jpg">
+          <img src="/static/images/road3.jpg">
+          <img src="/static/images/road4.jpg">
+          <img src="/static/images/road5.jpg">
+          <img src="/static/images/road6.jpg">
+          <img src="/static/images/road7.jpg">
+          <img src="/static/images/road8.jpg">
+          <img src="/static/images/road9.jpg">
+          <img src="/static/images/road10.jpg">
+          <img src="/static/images/road11.jpg">
+          <img src="/static/images/road12.jpg">
+          <img src="/static/images/road13.jpg">
+          <img src="/static/images/road14.jpg">
+          <img src="/static/images/road15.jpg">
+        </div>
+
+      </div>
+      <div id="responses" class="col-sm-11">
+        <h3><strong><u>Let's Write About Roads</u></strong></h3>
+        <p>What road speaks to you?  Find an image of a road that sparks an emotion and write about it.  It can be any thing from the roads you have taken in life, the road ahead or even the road you travle to work each day. Once you have submitted your inspiration others can give you feed back.  You can also look at other people's writing using the menue on the bottom.  See how the same image that inspired you inspired others.</p>
+        </br>
+        <form id="primarySubmit" class="col-sm-offset-1 col-sm-11" action="" method="PUT">
+          <label><h2>Submit your thoughts below</h2></label>
+          </br>
+          <input id="submiterName" type="text" name="name" placeholder='Enter Your Name'></input>
+          </br>
+          <textarea id="userSubmit"class="form-contol col-sm-offset-1 col-sm-10" rows="10" col="100" placeholder="Enter your writing about a road here" name="primarySubmit"></textarea>
+          </br>
+          <input id="imageSelected" type="hidden" name="inspiPhoto" value=""></input>
+          <input id="timeSubmit" type="hidden" name="dateTime" value=""></input>
+          <button type="submit" class="form-control">Submit</button>
+        </form>
+       
+      </div>
+      <div class="container col-sm-11 clearfix">
+        <div id="inspiTabs" data-toggle="tab">
+
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#recents" aria-controls="recents" role="tab" data-toggle="tab">Most Recent Posts</a></li>
+            <li role="presentation"><a href="#pop" aria-controls="pop" role="tab" data-toggle="tab">Most Popular image</a></li>
+            <li role="presentation"><a href="#inspiphotos" aria-controls="inspiphotos" role="tab" data-toggle="tab">Submission by Image</a></li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="recents">
+              <h2>Most Recent Posts</h2>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="pop">
+              <h2>Top 3 Most Liked Submissions</h2>
+              <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Most Popular Submissions</div>
+
+                <!-- Table -->
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Position</th>
+                      <th>Post Image</th>
+                      <th>Submission</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td id='posOneImg'><img src="http://placehold.it/70x52"></td>
+                      <td id='posOneSub'>'There is no top posts'</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td id='posTwoImg'><img src="http://placehold.it/70x52"></td>
+                      <td id='posTwoSub'>There is no top posts</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td id='posThrImg'><img src="http://placehold.it/70x52"></td>
+                      <td id='posThrSub'>There is no top posts</td>
+                    </tr>
+                  </tbody>
+                  ...
+                </table>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="inspiphotos">
+              <h2>Submissions Sorted by the Inspiring Image</h2>
+              <div id="inspiSubmits">
+                <div class="tabbable">
+                      <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab1" data-toggle="tab"># 1</a>
+                        </li>
+                        <li><a href="#tab2" data-toggle="tab"># 2</a>
+                        </li>
+                        <li><a href="#tab3" data-toggle="tab"># 3</a>
+                        </li>
+                        <li><a href="#tab4" data-toggle="tab"># 4</a>
+                        </li>
+                        <li><a href="#tab5" data-toggle="tab"># 5</a>
+                        </li>
+                        <li><a href="#tab6" data-toggle="tab"># 6</a>
+                        </li>
+                        <li><a href="#tab7" data-toggle="tab"># 7</a>
+                        </li>
+                        <li><a href="#tab8" data-toggle="tab"># 8</a>
+                        </li>
+                        <li><a href="#tab9" data-toggle="tab"># 9</a>
+                        </li>
+                        <li><a href="#tab10" data-toggle="tab"># 10</a>
+                        </li>
+                        <li><a href="#tab11" data-toggle="tab"># 11</a>
+                        </li>
+                        <li><a href="#tab12" data-toggle="tab"># 12</a>
+                        </li>
+                        <li><a href="#tab13" data-toggle="tab"># 13</a>
+                        </li>
+                        <li><a href="#tab14" data-toggle="tab"># 14</a>
+                        </li>
+                        <li><a href="#tab15" data-toggle="tab"># 15</a>
+                        </li>
+                      </ul>
+                      <div class="tab-content">
+                        <div class="tab-pane active" id="tab1">
+                            <div id="inspiphoto1">
+                              <img src="/static/images/road1.jpg">
+                              <div id="inspi1Submits"></div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab2">
+                          <div id="inspiphoto2">
+                            <img src="/static/images/road2.jpg">
+                            <div id="inspi2Submits"></div>
+                          </div>
+                        </div>
+                        <div class="tab-pane active" id="tab3">
+                            <div id="inspiphoto3">
+                              <img src="/static/images/road3.jpg">
+                              <div id="inspi3Submits"></div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab4">
+                          <div id="inspiphoto4">
+                            <img src="/static/images/road4.jpg">
+                            <div id="inspi4Submits"></div>
+                          </div>
+                        </div>
+                        <div class="tab-pane active" id="tab5">
+                            <div id="inspiphoto5">
+                              <img src="/static/images/road5.jpg">
+                              <div id="inspi5Submits"></div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab6">
+                          <div id="inspiphoto6">
+                            <img src="/static/images/road6.jpg">
+                            <div id="inspi6Submits"></div>
+                          </div>
+                        </div>
+                        <div class="tab-pane active" id="tab7">
+                            <div id="inspiphoto7">
+                              <img src="/static/images/road7.jpg">
+                              <div id="inspi7Submits"></div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab8">
+                          <div id="inspiphoto8">
+                            <img src="/static/images/road8.jpg">
+                            <div id="inspi8Submits"></div>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tab9">
+                          <div id="inspiphoto9">
+                            <img src="/static/images/road9.jpg">
+                            <div id="inspi9Submits"></div>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tab10">
+                          <div id="inspiphoto10">
+                            <img src="/static/images/road10.jpg">
+                            <div id="inspi10Submits"></div>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tab11">
+                          <div id="inspiphoto11">
+                            <img src="/static/images/road11.jpg">
+                            <div id="inspi11Submits"></div>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tab12">
+                          <div id="inspiphoto12">
+                            <img src="/static/images/road12.jpg">
+                            <div id="inspi12Submits"></div>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tab13">
+                          <div id="inspiphoto13">
+                            <img src="/static/images/road13.jpg">
+                            <div id="inspi13Submits"></div>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tab14">
+                          <div id="inspiphoto14">
+                            <img src="/static/images/road14.jpg">
+                            <div id="inspi14Submits"></div>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tab15">
+                          <div id="inspiphoto15">
+                            <img src="/static/images/road15.jpg">
+                            <div id="inspi15Submits"></div>
+                          </div>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

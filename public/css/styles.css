@@ -1,0 +1,130 @@
+body {
+  color: #333;
+  font-family: Helvetica, Arial, sans-serif;
+  /*background-color: skyblue; /* Sanity Check! */
+}
+
+h1 {
+  margin-top: 50px;
+/*  margin-bottom: 10px;*/
+  text-align: center;
+  font-size: 70px;
+  font-family: Impact, Charcoal, sans-serif;
+}
+
+h2{
+	font-size: 40px;
+	margin-bottom: 5px;
+}
+
+hr {
+    border: 0;
+    height: 0;
+    box-shadow: 0 0 10px 1px yellow;
+    font-size: 30px;
+}
+
+button{
+	width: 100px;
+	height: 30px;
+
+}
+
+body{
+	background-image: url('../images/backroad.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-image: center;
+	background-size: 100%;
+	color:black;
+}
+
+#wrapper{
+	margin-left: 50px;
+	margin-top: -40px;
+	margin-bottom: 100px;
+	font-family: Verdana,Geneva, sans-serif;
+
+}
+
+
+#photodisplay{
+	padding: 15px;
+	float: left;
+	background-color: black;
+	margin-top: 30px;
+}
+
+#photodisplay img{
+	max-width: 100%;
+}
+
+#photoselector{
+	float: right;
+	max-width: 300px;
+}
+
+#photoselector img{
+	float: left;
+	max-width: 80px;
+	padding: 10px;
+	max-height: 64px;
+}
+
+#responses{
+	padding: 10px;
+	clear: both;
+}
+
+#userSubmit{
+	width: 80%;
+	margin-top: 10px;
+	margin-left: 15px;
+}
+#primarySubmit button{
+	width:20%;
+	float: right;
+	margin-right: 150px;
+}
+
+#inspiTabs{
+	clear:both;
+}
+
+#inspiTabs h2{
+	font-size: 30px;
+	padding: 10px;
+}
+
+.tab-pane img{
+	padding: 15px;
+	background-color: black;
+	display: block;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 650px;
+}
+a:link {
+	color: black;
+}
+a:hover { 
+    background-color: yellow;
+}
+
+#inspiSubmits a{
+	font-size: 15px;
+	margin-left: -10px;
+}
+
+#like {
+	max-width: 50px;
+	float: right;
+	margin-top: 10px;
+}
+
+#counter{
+	margin-top: 10px;
+	float: left;
+}
