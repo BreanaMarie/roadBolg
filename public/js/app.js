@@ -86,9 +86,18 @@ $('#primarySubmit').on('submit', function(e){
 	e.preventDefault();
 	var data= $(this).serialize();
 		console.log(data);
-		var submission = $("#userSubmit").val();
-		var submitName = $("#submiterName").val();
-	$.post('/api/submissions', data, function(prisubmit){
+		// var submission = $("#userSubmit").val();
+		// var submitName = $("#submiterName").val();
+		var newSubmission = new SubmissionSchema(
+			submissions[_id].getInformation()
+		);
+		newSubmission.save(function(err){
+			if (err){
+				console.log(err);
+				res.status(500).json({status: 'failure'});
+			}
+		});
+	$.post('/submissions', data, function(prisubmit){
 		console.log(prisubmit);
 		$("#list").append('<li> ' + prisubmit.body + '</li>');
 		$('#list')[0].reset();

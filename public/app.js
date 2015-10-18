@@ -82,87 +82,17 @@ var likebtn= ('<button id="like" type="submit" class="form-control">Like</button
 var sort='';	
 //var allFields='';	
 //gets the content submitted by primary user
-$("#primarySubmit").on('submit', function(e){
+$("#primarySubmit").on('submit', function(e) {
 	e.preventDefault();
-	var submission = $("#userSubmit").val();
-	var submitName = $("#submiterName").val();
-	console.log(submission);
-
-	//get the image that was used for inspiration
-	$('#imageSelected').attr('value', image);
-
-	//get a time stamp for the submission
-	var dateTime= new Date();
-	$('#timeSubmit').attr('value', dateTime);
-
-	//make the submission look like a pretty block of text
-	var allFields = ('<div><h2>' +  submitName + '</h2></br><p>' + submission + 
-		'</p></br><p align="right">' + dateTime + '</p></div>'); 
-
-	//add a form to primary submission
-	var createForm= ('<div><form class="col-sm-offset-1 col-sm-11 afterSubmit" action="" method="PUT">'+
-		'<label><h2>Want to Respond to this Writer?</h2></label></br>'+
-		'<input id="submiterName2" type="text" name="name" placeholder="Enter Your Name"></input>'+
-		'</br><textarea id="userSubmit2"class="form-contol col-sm-offset-1 col-sm-10" rows="5" col="100" placeholder="Enter your response here" name="secondarySubmit"></textarea>'+
-		'<button type="submit" class="form-control submitBtn">Submit</button></form></div>' +
-		'<div id="allResponse"></div>'
-		);
-
-	//add submission to recent submissions
-	$('#recents').append(allFields + 'in response to image' + image + '</br>' + likebtn + createForm);
-
-	//create a switch statement that sorts the primary submission by the 
-	//image selected and pushes the information into corilating tabs
-	switch(image){
-		case '/static/images/road1.jpg':
-		sort= $('#inspi1Submits');
-		$('#inspi1Submits').append(allFields + likebtn +createForm);
-		break;
-		case '/static/images/road2.jpg':
-		$('#inspi2Submits').append(allFields + likebtn +createForm);
-		break;
-		case '/static/images/road3.jpg':
-		$('#inspi3Submits').append(allFields + likebtn +createForm);
-		break;
-		case '/static/images/road4.jpg':
-		$('#inspi4Submits').append(allFields + likebtn +createForm);
-		break;
-		case '/static/images/road5.jpg':
-		$('#inspi5Submits').append(allFields + likebtn +createForm);
-		break;
-		case '/static/images/road6.jpg':
-		$('#inspi6Submits').append(allFields + likebtn +createForm);
-		break;
-		case '/static/images/road7.jpg':
-		$('#inspi7Submits').append(allFields + likebtn +createForm);
-		break;
-		case '/static/images/road8.jpg':
-		$('#inspi8Submits').append(allFields + likebtn +createForm);
-		break;
-		case '/static/images/road9.jpg':
-		$('#inspi9Submits').append(allFields + likebtn +createForm);
-		break;
-		case '/static/images/road10.jpg':
-		$('#inspi10Submits').append(allFields + likebtn +createForm);
-		break;
-		case '/static/images/road11.jpg':
-		$('#inspi11Submits').append(allFields + likebtn +createForm);
-		break;
-		case '/static/images/road12.jpg':
-		$('#inspi12Submits').append(allFields + likebtn +createForm);
-		break;
-		case '/static/images/road13.jpg':
-		$('#inspi13Submits').append(allFields + likebtn +createForm);
-		break;
-		case '/static/images/road14.jpg':
-		$('#inspi14Submits').append(allFields + likebtn +createForm);
-		break;
-		case '/static/images/road15.jpg':
-		$('#inspi15Submits').append(allFields + likebtn +createForm);
-		break;
-	}
+	console.log('here we are');
+	console.log('this: ', $(this)); // should be form
+	var formData =$(this).serialize();
+	console.log('serializd form data: ', formData); // all the fields submitted
+   
+    console.log('WTF');
 
 });
+
 var afterdateTime='';
 //take secondary submissions and post to original submit
 $(".tab-content").on('click', ".submitBtn", function(e){
