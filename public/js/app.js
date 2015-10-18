@@ -2,9 +2,10 @@ console.log("Sanity Check: client JS is working!");
 
 $(document).ready(function(){
 
+//*** photo display information ***
 var image='';
 
-//Start with a random inspiration photo
+//Start with a random inspiration photo 
 window.onload= function (){
  	var rand = Math.round((Math.random() * 15) + 1);
  	console.log(rand);
@@ -62,31 +63,44 @@ window.onload= function (){
 
 //create on thumbnail click full image appears in display to left
 
-
 $("#photoselector img").on('click', function(e){
 	e.preventDefault();
 	console.log(this);
 	image= $(this).attr('src');
 
-//$('#photodisplay').html(image);
-
 
 $('#photodisplay img').attr('src', image);
 });
+
+// *** Form Information ****
 
 //add a like button to primary and secondary submitted 
 var likebtn= ('<button id="like" type="submit" class="form-control">Like</button>' + 
 	'<div id="counter"><p>There are currently: 0 Likes for this Submission</p></div>');
 
-//var createForm='';
+
 var sort='';	
 //var allFields='';	
-//gets the content submitted by primary user
-$("#primarySubmit").on('submit', function(e){
+//primary form submit handler
+$('#primarySubmit').on('submit', function(e){
 	e.preventDefault();
-	var submission = $("#userSubmit").val();
-	var submitName = $("#submiterName").val();
-	console.log(submission);
+	var data= $(this).serialize();
+		console.log(data);
+		var submission = $("#userSubmit").val();
+		var submitName = $("#submiterName").val();
+	$.post('/api/submissions', data, function(prisubmit){
+		console.log(prisubmit);
+		$("#list").append('<li> ' + prisubmit.body + '</li>');
+		$('#list')[0].reset();
+	});
+// });
+
+// //gets the content submitted by primary user
+// $("#primarySubmit").on('submit', function(e){
+// 	e.preventDefault();
+// 	var submission = $("#userSubmit").val();
+// 	var submitName = $("#submiterName").val();
+// 	console.log(submission);
 
 	//get the image that was used for inspiration
 	$('#imageSelected').attr('value', image);
