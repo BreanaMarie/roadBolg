@@ -10,3 +10,4 @@ db.once('open', function (callback) {
 });
 
 module.exports.Submission = require('./submission.js');
+module.exports.SecondarySubmission = require('./secondary.js');

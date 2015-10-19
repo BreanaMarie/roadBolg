@@ -37,7 +37,7 @@ app.get('/submissions', function(req, res){
 	});
 });
 
-//set up an api to post to
+//set up an api to post primary submissions to
 app.post('/submissions', function(req, res) {
 	console.log('post request: '+ req.body);
 	var submission= req.body;
@@ -47,8 +47,18 @@ app.post('/submissions', function(req, res) {
 		}
 		res.json(prisubmit);
 	});
-	// console.log("post is working");
-	// res.json();
+});
+
+//set up an api to post secondary submissions to
+app.post('/secondary', function(req, res) {
+	console.log('post request: '+ req.body);
+	var secsubmission= req.body;
+	submissionDb.Secondary.create(req.body, function(err, secsubmit){
+		if (err){
+			console.log(err);
+		}
+		res.json(secsubmit);
+	});
 });
 
 //set up a delete from the api

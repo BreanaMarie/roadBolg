@@ -78,39 +78,11 @@ $('#photodisplay img').attr('src', image);
 var likebtn= ('<button id="like" type="submit" class="form-control">Like</button>' + 
 	'<div id="counter"><p>There are currently: 0 Likes for this Submission</p></div>');
 
+var removebtn =('<button id="remove" type="submit" class="form-control">remove</button>');
+
 
 var sort='';	
 
-//primary form submit handler
-
-// $('#primarySubmit').on('submit', function(e) {
-// 	e.preventDefault();
-// 	console.log("submit button is clicked");
-//  	var formData= $(this).serialize();
-//  		console.log(formData);
-
-//  		$.ajax({
-//  			url:'/submissions',
-//  			type:"POST",
-//  			data: formData
-//  		});
-		// var submission = $("#userSubmit").val();
-		// var submitName = $("#submiterName").val();
-		// var newSubmission = new SubmissionSchema(
-		// 	submissions[_id].getInformation()
-		// );
-		// newSubmission.save(function(err){
-		// 	if (err){
-		// 		console.log(err);
-		// 		res.status(500).json({status: 'failure'});
-		// 	}
-		// });
-	// $.post('/submissions', data, function(prisubmit){
-	// 	console.log(prisubmit);
-	// 	$("#list").append('<li> ' + prisubmit.body + '</li>');
-	// 	$('#list')[0].reset();
-	// });
- 
 
 //gets the content submitted by primary user
 $("#primarySubmit").on('submit', function(e){
@@ -135,7 +107,7 @@ $("#primarySubmit").on('submit', function(e){
 	 		data: formData
 	 	})
 	 	.done(function(data){
-	 		console.log("created submission successfuly");
+	 		console.log("created primary submission successfuly");
 
 	 	});
 
@@ -147,16 +119,17 @@ $("#primarySubmit").on('submit', function(e){
 		'</p></br><p align="right">' + dateTime + '</p></div>'); 
 
 	//add a form to primary submission
-	var createForm= ('<div><form class="col-sm-offset-1 col-sm-11 afterSubmit" action="" method="PUT">'+
+	var createForm= ('<div><form class="col-sm-offset-1 col-sm-11 afterSubmit">'+
 		'<label><h2>Want to Respond to this Writer?</h2></label></br>'+
 		'<input id="submiterName2" type="text" name="name" placeholder="Enter Your Name"></input>'+
 		'</br><textarea id="userSubmit2"class="form-contol col-sm-offset-1 col-sm-10" rows="5" col="100" placeholder="Enter your response here" name="secondarySubmit"></textarea>'+
+		'<input type=" hidden" name= "primaryPostId">'+ this._id +'</input>'+
 		'<button type="submit" class="form-control submitBtn">Submit</button></form></div>' +
 		'<div id="allResponse"></div>'
 		);
 
 	//add submission to recent submissions
-	$('#recents').append(allFields + 'in response to image' + image + '</br>' + likebtn + createForm);
+	$('#recents').append(allFields + ' Submission inspired by image' + image + '</br>' + likebtn + ' ' + removebtn + ' ' + createForm);
 
 	//create a switch statement that sorts the primary submission by the 
 	//image selected and pushes the information into corilating tabs
@@ -225,6 +198,19 @@ $(".tab-content").on('click', ".submitBtn", function(e){
 
 	//add secondary submission below primary submission
 	$('#allResponse').append(submiterName2 + '</br>' + aftersubmission + '</br> ' + afterdateTime + ' ' + likebtn);
+
+	var secFormData = $(this).serialize();
+	console.log(secFormData);
+
+		$.ajax({
+	 		url:'/secondary',
+	 		type:"POST",
+	 		data: secFormData
+	 	})
+	 	.done(function(data){
+	 		console.log("created secondary submission successfuly");
+
+	 	});
 
 });
 
