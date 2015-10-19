@@ -33,15 +33,13 @@ app.get('/', function(req,res){
 app.get('/submissions', function(req, res){
 	submissionDb.Submission.find({}, function(err, submissions){
 		if (err) console.log(err);
-		res.render('index', {
-			submissions: submissions
-		});
+		res.render('index', {submissions: submissions});
 	});
 });
 
 //set up an api to post to
-app.post("/submissions", function(req, res){
-	console.log('post request: ', req.body);
+app.post('/submissions', function(req, res) {
+	console.log('post request: '+ req.body);
 	var submission= req.body;
 	submissionDb.Submission.create(req.body, function(err, prisubmit){
 		if (err){

@@ -128,12 +128,17 @@ $("#primarySubmit").on('submit', function(e){
 	//grab the information populated in the form and combine it to be sent
 	var formData = $(this).serialize();
 	console.log(formData);
+
 		$.ajax({
 	 		url:'/submissions',
 	 		type:"POST",
 	 		data: formData
+	 	})
+	 	.done(function(data){
+	 		console.log("created submission successfuly");
+
 	 	});
-	 	
+
 	 	var submission = $("#userSubmit").val();
 	 	var submitName = $("#submiterName").val();
 
