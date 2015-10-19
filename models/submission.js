@@ -4,10 +4,10 @@ var Schema = mongoose.Schema;
 
 var SubmissionSchema = mongoose.Schema({
 	//postNumber:_id, //auto created by mongo?
-	submiterName:String, //Name placed in the form field submiterName
-	userSubmit:String, //content of writting from form field userSubmit
-	imageSelected:String, //hidden field that is populated by image display
-	timeSubmit:String, //hidden field this auto populated with the time and date upon click of submit button
+	name:String, //Name placed in the form field submiterName
+	primarySubmit:String, //content of writting from form field userSubmit
+	inspiPhoto:String, //hidden field that is populated by image display
+	dateTime:String, //hidden field this auto populated with the time and date upon click of submit button
 
 });
 

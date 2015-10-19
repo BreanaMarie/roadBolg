@@ -80,36 +80,43 @@ var likebtn= ('<button id="like" type="submit" class="form-control">Like</button
 
 
 var sort='';	
-//var allFields='';	
+
 //primary form submit handler
-$('#primarySubmit').on('submit', function(e){
-	e.preventDefault();
-	var data= $(this).serialize();
-		console.log(data);
+
+// $('#primarySubmit').on('submit', function(e) {
+// 	e.preventDefault();
+// 	console.log("submit button is clicked");
+//  	var formData= $(this).serialize();
+//  		console.log(formData);
+
+//  		$.ajax({
+//  			url:'/submissions',
+//  			type:"POST",
+//  			data: formData
+//  		});
 		// var submission = $("#userSubmit").val();
 		// var submitName = $("#submiterName").val();
-		var newSubmission = new SubmissionSchema(
-			submissions[_id].getInformation()
-		);
-		newSubmission.save(function(err){
-			if (err){
-				console.log(err);
-				res.status(500).json({status: 'failure'});
-			}
-		});
-	$.post('/submissions', data, function(prisubmit){
-		console.log(prisubmit);
-		$("#list").append('<li> ' + prisubmit.body + '</li>');
-		$('#list')[0].reset();
-	});
-// });
+		// var newSubmission = new SubmissionSchema(
+		// 	submissions[_id].getInformation()
+		// );
+		// newSubmission.save(function(err){
+		// 	if (err){
+		// 		console.log(err);
+		// 		res.status(500).json({status: 'failure'});
+		// 	}
+		// });
+	// $.post('/submissions', data, function(prisubmit){
+	// 	console.log(prisubmit);
+	// 	$("#list").append('<li> ' + prisubmit.body + '</li>');
+	// 	$('#list')[0].reset();
+	// });
+ 
 
-// //gets the content submitted by primary user
-// $("#primarySubmit").on('submit', function(e){
-// 	e.preventDefault();
-// 	var submission = $("#userSubmit").val();
-// 	var submitName = $("#submiterName").val();
-// 	console.log(submission);
+//gets the content submitted by primary user
+$("#primarySubmit").on('submit', function(e){
+	e.preventDefault();
+	console.log("submit button was clicked");
+
 
 	//get the image that was used for inspiration
 	$('#imageSelected').attr('value', image);
@@ -117,6 +124,18 @@ $('#primarySubmit').on('submit', function(e){
 	//get a time stamp for the submission
 	var dateTime= new Date();
 	$('#timeSubmit').attr('value', dateTime);
+
+	//grab the information populated in the form and combine it to be sent
+	var formData = $(this).serialize();
+	console.log(formData);
+		$.ajax({
+	 		url:'/submissions',
+	 		type:"POST",
+	 		data: formData
+	 	});
+	 	
+	 	var submission = $("#userSubmit").val();
+	 	var submitName = $("#submiterName").val();
 
 	//make the submission look like a pretty block of text
 	var allFields = ('<div><h2>' +  submitName + '</h2></br><p>' + submission + 
@@ -186,6 +205,7 @@ $('#primarySubmit').on('submit', function(e){
 	}
 
 });
+
 var afterdateTime='';
 //take secondary submissions and post to original submit
 $(".tab-content").on('click', ".submitBtn", function(e){

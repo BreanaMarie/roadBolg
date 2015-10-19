@@ -43,7 +43,7 @@ app.get('/submissions', function(req, res){
 app.post("/submissions", function(req, res){
 	console.log('post request: ', req.body);
 	var submission= req.body;
-	db.Submission.create(req.body, function(err, prisubmit){
+	submissionDb.Submission.create(req.body, function(err, prisubmit){
 		if (err){
 			console.log(err);
 		}
