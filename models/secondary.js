@@ -8,7 +8,7 @@ var SecondarySchema = mongoose.Schema({
 	name:String, //Name placed in the form field submiterName2
 	secondarySubmit:String, //content of writting from form field userSubmit2
 	primaryPostId:String, //hidden field that is populated by taking the _ID created by mongo for primary submit
-	dateTime:String, //hidden field this auto populated with the time and date upon click of submit button
+	secondTime:String, //hidden field this auto populated with the aftertime upon click of submit button
 
 });
 

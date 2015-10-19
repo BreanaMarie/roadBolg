@@ -75,10 +75,10 @@ $('#photodisplay img').attr('src', image);
 // *** Form Information ****
 
 //add a like button to primary and secondary submitted 
-var likebtn= ('<button id="like" type="submit" class="form-control">Like</button>' + 
-	'<div id="counter"><p>There are currently: 0 Likes for this Submission</p></div>');
+var likebtn= ('<button id="like" type="submit" class="form-control like">Like</button>' + 
+	'<div id="counter" class="counter"><p>There are currently: 0 Likes for this Submission</p></div>');
 
-var removebtn =('<button id="remove" type="submit" class="form-control">remove</button>');
+var removebtn =('<button id="remove" type="submit" class="form-control remove">remove</button>');
 
 
 var sort='';	
@@ -124,7 +124,8 @@ $("#primarySubmit").on('submit', function(e){
 		'<input id="submiterName2" type="text" name="name" placeholder="Enter Your Name"></input>'+
 		'</br><textarea id="userSubmit2"class="form-contol col-sm-offset-1 col-sm-10" rows="5" col="100" placeholder="Enter your response here" name="secondarySubmit"></textarea>'+
 		'<input type=" hidden" name= "primaryPostId">'+ this._id +'</input>'+
-		'<button type="submit" class="form-control submitBtn">Submit</button></form></div>' +
+		'<input id="secondTime" type=" hidden" name= "secondTime"></input>'+
+		'<button type="submit" class="form-control submitBtn2">Submit</button></form></div>' +
 		'<div id="allResponse"></div>'
 		);
 
@@ -184,9 +185,29 @@ $("#primarySubmit").on('submit', function(e){
 
 });
 
+//create a function to delete submission
+function deleteSubmission(context) {
+  console.log('context in submission to be deleted: ', context);
+  // context is the button that was clicked
+  var submitId = $(context).attr("data-id");
+  console.log(submitId);
+  $.ajax({
+    url: '/submissions/' + submitId,
+    type: 'DELETE',
+    success: function(response) {
+      // once successful, remove submission from the DOM
+      $(context).closest('li').remove();
+    }
+  });
+}
+//add the handler for the delete button
+$(document).on('click', 'button.remove', function(e){
+    deleteSubmission(this);
+});
+
 var afterdateTime='';
 //take secondary submissions and post to original submit
-$(".tab-content").on('click', ".submitBtn", function(e){
+$(".tab-content").on('click', ".submitBtn2", function(e){
 	e.preventDefault();
 	var aftersubmission = $("#userSubmit2").val();
 	var submitName2 = $("#submiterName2").val();
@@ -194,7 +215,7 @@ $(".tab-content").on('click', ".submitBtn", function(e){
 
 	//get a time stamp for the after submission
 	afterdateTime= new Date();
-	$('#timeSubmit').attr('value', afterdateTime);
+	$('#secondTime').attr('value', afterdateTime);
 
 	//add secondary submission below primary submission
 	$('#allResponse').append(submiterName2 + '</br>' + aftersubmission + '</br> ' + afterdateTime + ' ' + likebtn);
@@ -215,27 +236,28 @@ $(".tab-content").on('click', ".submitBtn", function(e){
 });
 
 //a like button function counter
-$(".tab-content").on('click', "#like", function() {
-    $('#counter').html(function(i, val) { 
+$(".tab-content").on('click', ".like", function() {
+    $('.counter').html(function(i, val) { 
     	//return + val+1 ;
-    	count= val+1;
+    	var count= val+1;
     	console.log(count);
-    	$('#counter p').attr('p' , count);
+    	$('.count p').attr('p' , 'There are currently: ' + count + 'Likes for this Submission');
     	
 	});
 });
 
-// $('#counter').data('count', 0);
-// $('#like').click(function(){
-//     $('#counter').html(function(){
-//         var $this = $(this),
-//             count = $this.data('count') + 1;
+//counts the likes upon click
+$('.tab-content').data('count', "#counter" ,0);
+$('.tab-content').click('#like', function(){
+    $('#counter').html(function(){
+        var $this = $(this),
+            count = $this.data('count') + 1;
 
-//         $this.data('count', count);
-//         //return count;
-//         $('#counter p').attr(p , count);
-//     });
-// });
+        $this.data('count', count);
+        //return count;
+        $('#counter p').attr(p , count);
+    });
+});
 
 //clickable tabs
 $('#inspiTabs a[href="#profile"]').tab('show'); // Select tab by name
@@ -247,7 +269,7 @@ $('#inspiTabs a').click(function (e) {
   $(this).tab('show');
 });
 
-//set default tab showing
+//set default tab showing to Most Recent
 $(window).load(function(){
     $('#inspiTabs a[href="#recents"]').tab('show');
 });
@@ -258,7 +280,5 @@ $(window).load(function(){
 });
 
 
-//create on submit function on form, text drops below as done
-// create a new form upon submit that will allow for comments
 
 });
