@@ -20,7 +20,7 @@ var submissionDb =require('./models');
 //set up where to render
 app.get('/', function(req,res){
 	console.log("get root is working");
-	res.render('index.ejs');
+	res.redirect('/submissions');
 });
 
 //set where to the api
@@ -63,7 +63,7 @@ app.post('/secondary', function(req, res) {
 
 //set up a delete from the api
 app.delete('/submissions/:_id', function(req, res){
-	console.log ("the entire " + _id + " has been selected to be delted");
+	console.log ("the entire " + req.params._id + " has been selected to be delted");
 	submissionDb.Submission.find({
 		_id: req.params._id
 	})

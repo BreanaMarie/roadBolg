@@ -84,6 +84,16 @@
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="recents">
               <h2>Most Recent Posts</h2>
+              <div>
+                <%for (var i=0; i < submissions.length; i++) { %>
+                  <li class="list-group-item">
+                    <h4 class="list-group-item-heading"><%= submissions[i].name %></h4>
+                    <span class='list-group-item-text'><%= submissions[i].primarySubmit %></span></br>
+                    <span id='time' class='list-group-item-text'><%= submissions[i].dateTime %></span></br>
+                    <button data-id="<%=submissions[i].id %>" class='close' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                  </li>
+                <% } %>
+              </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="pop">
               <h2>Top 3 Most Liked Submissions</h2>
@@ -162,6 +172,19 @@
                             <div id="inspiphoto1">
                               <img src="/static/images/road1.jpg">
                               <div id="inspi1Submits"></div>
+                              <!-- list of all submissions with photo 1 -->
+                              <ul class="list-group" id="inspi1Submits-ul">
+                                <%for (var i=0; i < submissions.length; i++) { %>
+                                <% if (submissions[i].inspiPhoto === "/static/images/road1.jpg") { %>
+                                  <li class="list-group-item">
+                                    <h4 class="list-group-item-heading"><%= submissions[i].name %></h4>
+                                    <span class='list-group-item-text'><%= submissions[i].primarySubmit %></span></br>
+                                    <span id='time' class='list-group-item-text'><%= submissions[i].dateTime %></span></br>
+                                    <button data-id="<%=submissions[i].id %>" type='button' class='close' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                                  </li>
+                                  <% } %>
+                                <% } %>
+                              </ul>
                             </div>
                         </div>
                         <div class="tab-pane" id="tab2">

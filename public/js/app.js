@@ -134,6 +134,15 @@ $("#primarySubmit").on('submit', function(e){
 
 	//create a switch statement that sorts the primary submission by the 
 	//image selected and pushes the information into corilating tabs
+	// for (var i=0; i < submissions.length; i++) { 
+	//  	if (submissions[i].inspiPhoto === "/static/images/road1.jpg") {
+	//   <li class="list-group-item">
+	//     <h4 class="list-group-item-heading"><%= submissions[i].name %></h4>
+	//     <span class='list-group-item-text'><%= submissions[i].primarySubmit %></span>
+	//     <span class='list-group-item-text'><%= submissions[i].inspiPhoto %></span>
+	//     <span class='list-group-item-text'><%= submissions[i].dateTime %></span>
+	//     <button data-id="<%=submissions[i].id %>" type='button' class='close' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+
 	switch(image){
 		case '/static/images/road1.jpg':
 		sort= $('#inspi1Submits');
@@ -186,23 +195,38 @@ $("#primarySubmit").on('submit', function(e){
 });
 
 //create a function to delete submission
-function deleteSubmission(context) {
-  console.log('context in submission to be deleted: ', context);
-  // context is the button that was clicked
-  var submitId = $(context).attr("data-id");
-  console.log(submitId);
-  $.ajax({
-    url: '/submissions/' + submitId,
-    type: 'DELETE',
-    success: function(response) {
-      // once successful, remove submission from the DOM
-      $(context).closest('li').remove();
-    }
-  });
-}
+// function deleteSubmission(context) {
+//   console.log('context in submission to be deleted: ', context);
+//   // context is the button that was clicked
+//   var submitId = $(context).attr("data-id");
+//   console.log(submitId);
+// 	$.ajax({
+// 	    url: '/submissions/' + submitId,
+// 	    type: 'DELETE',
+// 	    success: function(response) {
+// 	      // once successful, remove submission from the DOM
+// 	      $(context).closest('li').remove();
+// 	    }
+//   	});
+// }
 //add the handler for the delete button
-$(document).on('click', 'button.remove', function(e){
-    deleteSubmission(this);
+$('#inspiTabs').on('click', 'button.close', function(e){
+	e.preventDefault();
+	var submissionId =$(this).data().id;
+	var deleteSubmission =$(this).closest('li');
+		$.ajax({
+	    url: '/submissions/' + submissionId,
+	    type: 'DELETE',
+    	})
+    	.done(function(data) {
+    		console.log(data);
+    		$(deleteSubmission).remove();
+    		console.log("Submission has been deleted");
+    	})
+    	.fail(function(data) {
+    		console.log("failed to delete Submission");
+
+    	});
 });
 
 var afterdateTime='';
@@ -255,7 +279,7 @@ $('.tab-content').click('#like', function(){
 
         $this.data('count', count);
         //return count;
-        $('#counter p').attr(p , count);
+        $('#counter p').attr('p' , count);
     });
 });
 
