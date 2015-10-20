@@ -194,21 +194,7 @@ $("#primarySubmit").on('submit', function(e){
 
 });
 
-//create a function to delete submission
-// function deleteSubmission(context) {
-//   console.log('context in submission to be deleted: ', context);
-//   // context is the button that was clicked
-//   var submitId = $(context).attr("data-id");
-//   console.log(submitId);
-// 	$.ajax({
-// 	    url: '/submissions/' + submitId,
-// 	    type: 'DELETE',
-// 	    success: function(response) {
-// 	      // once successful, remove submission from the DOM
-// 	      $(context).closest('li').remove();
-// 	    }
-//   	});
-// }
+
 //add the handler for the delete button
 $('#inspiTabs').on('click', 'button.close', function(e){
 	e.preventDefault();
@@ -225,7 +211,6 @@ $('#inspiTabs').on('click', 'button.close', function(e){
     	})
     	.fail(function(data) {
     		console.log("failed to delete Submission");
-
     	});
 });
 
@@ -254,20 +239,33 @@ $(".tab-content").on('click', ".submitBtn2", function(e){
 	 	})
 	 	.done(function(data){
 	 		console.log("created secondary submission successfuly");
-
 	 	});
-
 });
 
 //a like button function counter
-$(".tab-content").on('click', ".like", function() {
-    $('.counter').html(function(i, val) { 
+$(".tab-content").on('click', "button.like", function(e) {
+	e.preventDefault();
+	var submissionId = $(this).data().id;
+	var submitlikes = $(this).closest('li');
+	console.log(submissionId);
+		$.ajax({
+	    url: '/submissions/' + submissionId,
+	    type: 'PUT',
+		})
+		.done(function(data) {
+			console.log("Submission has been liked");
+		})
+		.fail(function(data) {
+			console.log("failed to like Submission");
+
+		});
+});
+
+$('.counter').html(function(i, val) { 
     	//return + val+1 ;
     	var count= val+1;
     	console.log(count);
     	$('.count p').attr('p' , 'There are currently: ' + count + 'Likes for this Submission');
-    	
-	});
 });
 
 //counts the likes upon click
@@ -306,3 +304,19 @@ $(window).load(function(){
 
 
 });
+
+//create a function to delete submission
+// function deleteSubmission(context) {
+//   console.log('context in submission to be deleted: ', context);
+//   // context is the button that was clicked
+//   var submitId = $(context).attr("data-id");
+//   console.log(submitId);
+// 	$.ajax({
+// 	    url: '/submissions/' + submitId,
+// 	    type: 'DELETE',
+// 	    success: function(response) {
+// 	      // once successful, remove submission from the DOM
+// 	      $(context).closest('li').remove();
+// 	    }
+//   	});
+// }

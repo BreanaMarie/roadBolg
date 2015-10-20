@@ -32,6 +32,7 @@ button{
 
 .tab-content li{
 	opacity: .5;
+	margin-bottom: 30px;
 }
 
 button.close{
@@ -43,6 +44,13 @@ button.close{
 }
 
 
+button.like{
+	float: right;
+	margin-right: -80px;
+	margin-top: -150px;
+	opacity: 1;
+	color: black;
+}
 
 body{
 	background-image: url('../images/backroad.jpg');

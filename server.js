@@ -61,6 +61,16 @@ app.post('/secondary', function(req, res) {
 	});
 });
 
+//set a rout for the like button
+app.put('/submissions/:_id', function(req, res){
+	var submitlikes = submissionDb.Submission.find({
+		_id: req.params._id
+	});
+	submitlikes.like= submitlikes.like +1;
+	console.log("like counter updated");
+	res.json("The submission was liked");
+});
+
 //set up a delete from the api
 app.delete('/submissions/:_id', function(req, res){
 	console.log ("the entire " + req.params._id + " has been selected to be delted");
@@ -72,6 +82,7 @@ app.delete('/submissions/:_id', function(req, res){
 		res.json("That submission is gone");
 	});
 });
+
 
 
 //create a listener on a localhost

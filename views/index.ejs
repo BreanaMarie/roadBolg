@@ -91,6 +91,8 @@
                     <span class='list-group-item-text'><%= submissions[i].primarySubmit %></span></br>
                     <span id='time' class='list-group-item-text'><%= submissions[i].dateTime %></span></br>
                     <button data-id="<%=submissions[i].id %>" class='close' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                    <button id="like" type="submit" class="form-control like">Like</button>
+                    <div id="counter" class="counter"><p>There are currently: <%= submissions[i].like %> Likes for this Submission</p></div>
                   </li>
                 <% } %>
               </div>
